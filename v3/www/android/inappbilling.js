@@ -3,7 +3,7 @@
  */
 var inappbilling = { 
 
-	// Initialize the plugin
+    // Initialize the plugin
     init: function (success, fail) { 
       return cordova.exec( success, fail, 
                            "InAppBillingPlugin", 
@@ -15,11 +15,22 @@ var inappbilling = {
             "InAppBillingPlugin",
             "getPurchases", ["null"]);
     },
+    // get skudetails for list of products in skuList
+    getSkuDetails: function (success, fail, skuList) {
+        return cordova.exec( success, fail,
+            "InAppBillingPlugin",
+            "getSkuDetails", skuList);
+    },
     // purchase an item
     buy: function (success, fail, productId) {
         return cordova.exec( success, fail,
             "InAppBillingPlugin",
             "buy", [productId]);
+    },
+    getPurchaseReceipt: function (success, fail, sku) {
+        return cordova.exec( success, fail,
+            "InAppBillingPlugin",
+            "getPurchaseReceipt", [sku]);
     },
     // subscribe to an item
     subscribe: function (success, fail, productId) {

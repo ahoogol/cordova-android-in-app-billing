@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    id="com.phonegap.plugins.inappbilling"
+    version="1.0.0">
+
+    <name>InAppBilling</name>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+ <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+ 			<feature name="InAppBillingPlugin">
+        		<param name="android-package" value="com.smartmobilesoftware.inappbilling.InAppBillingPlugin" />
+    		</feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="com.android.vending.BILLING" />
+        </config-file>
+
+         <js-module src="www/android/inappbilling.js" name="InAppBillingPlugin">
+            <merges target="InAppBilling" />
+        </js-module>
+
+        <source-file src="src/com/android/vending/billing/IInAppBillingService.aidl" target-dir="src/com/android/vending/billing" />
+        <source-file src="src/com/smartmobilesoftware/inappbilling/InAppBillingPlugin.java" target-dir="src/com/smartmobilesoftware/inappbilling" />
+        <source-file src="src/com/smartmobilesoftware/util/Base64.java" target-dir="src/com/smartmobilesoftware/util" />
+        <source-file src="src/com/smartmobilesoftware/util/Base64DecoderException.java" target-dir="src/com/smartmobilesoftware/util" />
+        <source-file src="src/com/smartmobilesoftware/util/IabException.java" target-dir="src/com/smartmobilesoftware/util" />
+        <source-file src="src/com/smartmobilesoftware/util/IabHelper.java" target-dir="src/com/smartmobilesoftware/util" />
+        <source-file src="src/com/smartmobilesoftware/util/IabResult.java" target-dir="src/com/smartmobilesoftware/util" />
+        <source-file src="src/com/smartmobilesoftware/util/Inventory.java" target-dir="src/com/smartmobilesoftware/util" />
+        <source-file src="src/com/smartmobilesoftware/util/Purchase.java" target-dir="src/com/smartmobilesoftware/util" />
+        <source-file src="src/com/smartmobilesoftware/util/Security.java" target-dir="src/com/smartmobilesoftware/util" />
+        <source-file src="src/com/smartmobilesoftware/util/SkuDetails.java" target-dir="src/com/smartmobilesoftware/util" />
+    </platform>
+</plugin>
