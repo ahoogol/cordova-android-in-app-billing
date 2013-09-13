@@ -45,3 +45,5 @@ var inappbilling = {
             "consumePurchase", [productId]);
     }
 };
+
+module.exports = inappbilling;

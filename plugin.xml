@@ -21,8 +21,8 @@
             <uses-permission android:name="com.android.vending.BILLING" />
         </config-file>
 
-         <js-module src="www/android/inappbilling.js" name="InAppBillingPlugin">
-            <merges target="InAppBilling" />
+         <js-module src="www/android/inappbilling.js" name="inappbilling">
+             <clobbers target="inappbilling" />
         </js-module>
 
         <source-file src="src/com/android/vending/billing/IInAppBillingService.aidl" target-dir="src/com/android/vending/billing" />
