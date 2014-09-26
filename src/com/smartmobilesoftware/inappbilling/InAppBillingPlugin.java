@@ -41,7 +41,13 @@ public class InAppBillingPlugin extends CordovaPlugin {
 	 * want to make it easy for an attacker to replace the public key with one
 	 * of their own and then fake messages from the server.
 	 */
-	private final String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm+3rtKbxsmncdBx8+3ELNKkmIW1mDJTCdYivysNV4totPH76sxdf7JhWjCOTZ6B+1T7QgUH2IIXvyJAqgqULansQJPPqzZpOCbdd0GMM0uTOKNvcQK0/+gPRvsiKVfLQlcQTcOvaRGa9OIdzl7KzBjM5tybWCwOVGbND+e8MqAr7TP5+qobnZykIcAL5cGVheIBqSaUQnod3DIHgtb9fLW4jPdElkYXu41uSNdLRKff4L0zWB4XSu1pRsj5Y+mtjPpx9oayEXbDi4gh3dAgL0f45HWkWs3n7oJIqNvNUea9LKot97Frw8KQ00ASuPUSe8R6Y7b9Ke1SIC8gzcViJ6wIDAQAB";
+	
+	// Split the public key to smaller pieces (for security)
+	private final String base64EncodedPublicKey_piece1 = "";
+	private final String base64EncodedPublicKey_piece2 = "";
+	private final String base64EncodedPublicKey_piece3 = "";
+	private final String base64EncodedPublicKey_piece4 = "";
+	private final String base64EncodedPublicKey_piece5 = "";
 	
 	// (arbitrary) request code for the purchase flow
 	static final int RC_REQUEST = 10001;
@@ -103,7 +109,8 @@ public class InAppBillingPlugin extends CordovaPlugin {
 				
 				// Get Product Id 
 				final String sku = data.getString(0);
-				buy(sku);
+				final String payload = data.getString(1);
+				buy(sku, payload);
 	
 			} else if ("getPurchaseReceipt".equals(action)){
 				final String sku = data.getString(0);
@@ -115,7 +122,10 @@ public class InAppBillingPlugin extends CordovaPlugin {
 				
 				Log.d(TAG, "Purchase receipt: " + receipt.toString());
 				
-				callbackContext.success(receipt);
+				JSONArray purchaseDetails=new JSONArray();
+				purchaseDetails.put(purchase.getOriginalJson());
+				purchaseDetails.put(purchase.getSignature());
+				callbackContext.success(purchaseDetails);
 				
 			} else if ("subscribe".equals(action)) {
 				// Subscribe to an item
@@ -146,6 +156,11 @@ public class InAppBillingPlugin extends CordovaPlugin {
 	
 	// Initialize the plugin
 	private void init(){
+		String base64EncodedPublicKey=base64EncodedPublicKey_piece1+
+				base64EncodedPublicKey_piece2+
+				base64EncodedPublicKey_piece3+
+				base64EncodedPublicKey_piece4+
+				base64EncodedPublicKey_piece5;
 		
 		// Some sanity checks to see if the developer (that's you!) really followed the
 		// instructions to run this plugin
@@ -188,11 +203,11 @@ public class InAppBillingPlugin extends CordovaPlugin {
 	}
 	
 	// Buy an item
-	private void buy(final String sku){
+	private void buy(final String sku, final String payload){
 		/* TODO: for security, generate your payload here for verification. See the comments on 
 		 *        verifyDeveloperPayload() for more info. Since this is a sample, we just use 
 		 *        an empty string, but on a production app you should generate this. */
-		final String payload = "";
+		//final String payload = "";
 		
 		if (mHelper == null){
 			callbackContext.error("Billing plugin was not initialized");
@@ -335,7 +350,10 @@ public class InAppBillingPlugin extends CordovaPlugin {
 			
 			// add the purchase to the inventory
 			myInventory.addPurchase(purchase);
-			callbackContext.success(purchase.getSku());
+			JSONArray purchaseDetails = new JSONArray();
+			purchaseDetails.put(purchase.getOriginalJson());
+			purchaseDetails.put(purchase.getSignature());
+			callbackContext.success(purchaseDetails);
 
 		}
 	};
@@ -356,7 +374,10 @@ public class InAppBillingPlugin extends CordovaPlugin {
 				myInventory.erasePurchase(purchase.getSku());
 				Log.d(TAG, "Consumption successful. .");
 				
-				callbackContext.success(purchase.getOriginalJson());
+				JSONArray purchaseDetails = new JSONArray();
+				purchaseDetails.put(purchase.getOriginalJson());
+				purchaseDetails.put(purchase.getSignature());
+				callbackContext.success(purchaseDetails);
 				
 			}
 			else {
