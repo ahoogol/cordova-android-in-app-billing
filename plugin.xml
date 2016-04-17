@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     id="com.phonegap.plugins.inappbilling"
-    version="1.0.0">
+    version="1.0.1">
 
     <name>InAppBilling</name>
 
@@ -9,8 +9,15 @@
         <engine name="cordova" version=">=3.0.0" />
     </engines>
 
+	<preference name="API_KEY" />
  <!-- android -->
     <platform name="android">
+	
+		<source-file src="res/iab.xml" target-dir="res/values" />
+        <config-file target="res/values/iab.xml" parent="/*">
+            <string name="iab_api_key">$API_KEY</string>
+        </config-file>
+		
         <config-file target="res/xml/config.xml" parent="/*">
  			<feature name="InAppBillingPlugin">
         		<param name="android-package" value="com.smartmobilesoftware.inappbilling.InAppBillingPlugin" />

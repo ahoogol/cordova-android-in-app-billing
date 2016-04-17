@@ -42,13 +42,6 @@ public class InAppBillingPlugin extends CordovaPlugin {
 	 * of their own and then fake messages from the server.
 	 */
 	
-	// Split the public key to smaller pieces (for security)
-	private final String base64EncodedPublicKey_piece1 = "";
-	private final String base64EncodedPublicKey_piece2 = "";
-	private final String base64EncodedPublicKey_piece3 = "";
-	private final String base64EncodedPublicKey_piece4 = "";
-	private final String base64EncodedPublicKey_piece5 = "";
-	
 	// (arbitrary) request code for the purchase flow
 	static final int RC_REQUEST = 10001;
 	
@@ -156,11 +149,10 @@ public class InAppBillingPlugin extends CordovaPlugin {
 	
 	// Initialize the plugin
 	private void init(){
-		String base64EncodedPublicKey=base64EncodedPublicKey_piece1+
-				base64EncodedPublicKey_piece2+
-				base64EncodedPublicKey_piece3+
-				base64EncodedPublicKey_piece4+
-				base64EncodedPublicKey_piece5;
+	
+		int API_KEY_ID = cordova.getActivity().getResources().getIdentifier("iab_api_key", "string", cordova.getActivity().getPackageName());
+        String API_KEY = cordova.getActivity().getResources().getString(API_KEY_ID);
+		String base64EncodedPublicKey=API_KEY;
 		
 		// Some sanity checks to see if the developer (that's you!) really followed the
 		// instructions to run this plugin
