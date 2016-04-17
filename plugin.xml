@@ -25,12 +25,7 @@
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/*">
-			<uses-permission android:name="com.farsitel.bazaar.permission.PAY_THROUGH_BAZAAR" />
-			<!--   bazaar -->
-            <!--<uses-permission android:name="com.android.vending.BILLING" />
-			 google play -->
-			<!-- (none) cando -->
-			<!--<uses-permission android:name="ir.mservices.market.BILLING" />  myket -->
+			<uses-permission android:name="com.android.vending.BILLING" />
         </config-file>
 
          <js-module src="www/android/inappbilling.js" name="inappbilling">
