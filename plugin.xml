@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.phonegap.plugins.inappbilling"
     version="1.0.1">
 
     <name>InAppBilling</name>
-
-    <engines>
-        <engine name="cordova" version=">=3.0.0" />
-    </engines>
+	<description>Cordova plugin to in app billing in iranian stores and play store</description>
+	<license>MIT</license>
+	<keywords>cordova,iab</keywords>
 
 	<preference name="API_KEY" />
  <!-- android -->
