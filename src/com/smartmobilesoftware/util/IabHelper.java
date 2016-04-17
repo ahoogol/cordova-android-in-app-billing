@@ -262,10 +262,7 @@ public class IabHelper {
             }
         };
 
-        Intent serviceIntent = new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND"); //bazaar
-		//Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND"); //google play
-        //Intent serviceIntent = new Intent("com.ada.market.service.payment.BIND"); // cando
-        //Intent serviceIntent = new Intent("ir.mservices.market.InAppBillingService.BIND"); //myket
+        Intent serviceIntent = new Intent("ir.cafebazaar.pardakht.InAppBillingService.BIND");
         if (!mContext.getPackageManager().queryIntentServices(serviceIntent, 0).isEmpty()) {
             // service available to handle that Intent
             mContext.bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
