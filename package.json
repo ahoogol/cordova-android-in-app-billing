@@ -1,0 +1,27 @@
+{
+  "name": "com.phonegap.plugins.inappbilling",
+  "version": "1.0.1",
+  "description": "Cordova plugin to in app billing in iranian stores and play store",
+  "cordova": {
+    "id": "com.phonegap.plugins.inappbilling",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/escio/cordova-android-in-app-billing.git"
+  },
+  "keywords": [
+    "cordova",
+    "iab",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/escio/cordova-android-in-app-billing/issues"
+  },
+  "homepage": "https://github.com/escio/cordova-android-in-app-billing#readme"
+}
